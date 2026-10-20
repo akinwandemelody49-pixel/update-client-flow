@@ -1,0 +1,1083 @@
+# CLIENTFLOW — COMPLETE DASHBOARD DEVELOPMENT MASTER PROMPT
+
+## 1. YOUR ROLE
+
+Act as a senior React.js developer, UI/UX designer, frontend architect, and quality assurance engineer.
+
+Your task is to build a polished, professional, fully interactive dashboard for ClientFlow, a SaaS platform for independent graphic designers.
+
+Do not simply generate a visual mockup. Implement the actual application, connect its components to shared data, test interactions, and fix errors before declaring the work complete.
+
+Work directly in the existing project.
+
+**Project directory:** `/home/l2e/clientflow-web`
+
+Preserve existing working code, uploaded images, SVG assets, branding, and Git history. Inspect before editing. Never delete unrelated files or overwrite the existing implementation without a clear reason.
+
+If the project is already partially migrated to React, continue from its current state rather than rebuilding everything blindly.
+
+---
+
+## 2. PRODUCT VISION
+
+ClientFlow helps independent graphic designers manage their businesses professionally.
+
+Designers should be able to:
+- Present their work in an attractive portfolio.
+- Receive enquiries from prospective clients.
+- Track leads and follow-ups.
+- Manage projects and deadlines.
+- Monitor revenue and business performance.
+- Manage their public designer profile.
+- Organize their daily work from one dashboard.
+
+The dashboard should immediately answer:
+
+1. What requires my attention today?
+2. How many new enquiries have arrived?
+3. Which projects are active?
+4. How much potential revenue is in my pipeline?
+5. Which clients should I contact?
+6. Which deadlines are approaching?
+7. How much revenue has been collected?
+8. How effectively am I converting enquiries into projects?
+
+Keep the experience intuitive, clean, professional, and useful for a designer who may not have technical knowledge.
+
+## 3. REQUIRED TECHNOLOGY
+
+Use:
+- React.js with functional components and hooks.
+- Vite for development and production builds.
+- JavaScript and JSX unless the existing project already uses TypeScript.
+- Tailwind CSS with a configuration compatible with the installed version.
+- React Icons from `react-icons`, preferably icons from `react-icons/lu`.
+- React Router for client-side navigation.
+- Shared React state using Context or another proportionate state-management approach.
+- localStorage for prototype persistence.
+- A lightweight chart solution, such as Recharts, only if needed.
+- Semantic HTML and accessible components.
+
+Inspect installed dependencies first. Do not reinstall or replace working packages unnecessarily.
+
+Do not use direct DOM manipulation for ordinary React interactions.
+
+If the project is still a vanilla HTML/CSS/JavaScript application, migrate it carefully to React and Vite while preserving the existing design and assets.
+
+## 4. BRAND IDENTITY AND VISUAL STYLE
+
+Build a premium SaaS interface with a modern, restrained visual style.
+
+Brand name: ClientFlow.
+
+Color palette:
+- Primary coral: `#FF5A60`
+- Dark text: `#191B23`
+- Secondary text: `#687386`
+- Main background: `#F8FAFC`
+- Card background: `#FFFFFF`
+- Border: `#E7EAF0`
+- Positive status: restrained green
+- Warning status: amber
+- Information status: blue
+- Muted status: neutral gray
+
+Use Inter or a similar modern sans-serif font.
+
+Design requirements:
+- Clear typographic hierarchy.
+- Generous but efficient whitespace.
+- Consistent spacing.
+- Subtle borders and shadows.
+- Consistent rounded corners.
+- Professional data visualization.
+- Carefully aligned icons.
+- Restrained coral accents.
+- Smooth hover and focus states.
+- Responsive layouts.
+- No unnecessary gradients or decorative clutter.
+- No excessive animations.
+- No emoji used as interface icons.
+- No copied branding or proprietary assets from other companies.
+
+The dashboard must look like one coherent product, not a collection of unrelated templates.
+
+## 5. PROJECT AUDIT BEFORE CODING
+
+Before making changes:
+
+1. Inspect the complete project structure.
+2. Review `package.json`, Vite configuration, Tailwind configuration, and routing.
+3. Inspect the current homepage, dashboard, enquiries page, and related components.
+4. Review the existing `index.html`, `styles.css`, `main.js`, and any React files.
+5. Locate the existing image and SVG asset folders.
+6. Identify working functionality that must be preserved.
+7. Check Git status and existing changes.
+8. Create a safe checkpoint or backup before major structural changes when possible.
+
+Do not overwrite uncommitted work.
+
+After the audit, continue implementing the actual application. Do not stop after producing an audit report or plan.
+
+## 6. APPLICATION LAYOUT
+
+Build a reusable dashboard shell with:
+- Sidebar navigation.
+- Top header.
+- Main content area.
+- Responsive mobile navigation.
+- Notifications.
+- Profile menu.
+- Modal and toast layers where appropriate.
+
+Use the same shell across dashboard pages.
+
+### Desktop sidebar
+
+Target width: approximately 250px.
+
+Appearance:
+- White background.
+- Subtle right border.
+- Full available viewport height.
+- Consistent spacing.
+- ClientFlow logo and name at the top.
+- Navigation grouped into logical sections.
+- Demo user profile near the bottom.
+
+Navigation:
+
+MAIN
+- Overview
+- Enquiries
+- Projects
+- Portfolio
+
+WORKSPACE
+- Public Profile
+- Analytics
+- Settings
+
+Use React Icons:
+- Overview: `LuLayoutDashboard`
+- Enquiries: `LuInbox`
+- Projects: `LuFolderKanban`
+- Portfolio: `LuImages`
+- Public Profile: `LuUserRound`
+- Analytics: `LuChartNoAxesCombined`
+- Settings: `LuSettings`
+
+Verify icon exports against the installed package.
+
+The active route must have a pale coral background and coral icon/text. Other items should have subtle hover states.
+
+Show a badge for new enquiries only when the shared data supports it.
+
+Use a clearly identified fictional demo profile until real authentication exists.
+
+### Mobile navigation
+
+On mobile:
+- Hide the permanent sidebar.
+- Display a compact header.
+- Add a menu button.
+- Open the navigation as a drawer or panel.
+- Support closing via the close button, Escape key, and navigation selection.
+- Ensure the drawer fits the viewport.
+- Avoid horizontal scrolling.
+- Use React state to control visibility.
+
+### Top header
+
+Include:
+- Current page title.
+- Optional breadcrumb.
+- Contextual subtitle.
+- Notification button.
+- Profile/avatar menu.
+- Primary action relevant to the page.
+
+For Overview:
+
+Title: `Overview`
+
+Subtitle: `Here's what's happening with your design business.`
+
+Primary action: `Add enquiry`
+
+The action must open a working form.
+
+Do not leave decorative buttons that do nothing.
+
+## 7. OVERVIEW PAGE
+
+Route: `/dashboard`
+
+Build the page in this order:
+
+1. Welcome header.
+2. Demo-data notice.
+3. Four KPI cards.
+4. Performance chart and pipeline summary.
+5. Upcoming tasks and follow-ups.
+6. Recent enquiries.
+7. Recent activity.
+
+Use a responsive grid. The page should feel balanced, not overcrowded.
+
+### Welcome header
+
+Example:
+
+`Welcome back, Alex`
+
+Supporting text:
+
+`Here's your business at a glance.`
+
+"Alex" is sample data and must be configurable. Do not present fictional information as a real authenticated account.
+
+Include:
+- Add enquiry button.
+- Optional View portfolio link.
+
+### Demo-data notice
+
+Display:
+
+`Demo workspace — sample records are stored in this browser.`
+
+The notice should be unobtrusive and clear. Do not claim that demo data is backed up or synchronized.
+
+## 8. KPI CARDS
+
+Create a reusable `MetricCard` component.
+
+Each card includes:
+- Label.
+- Main value.
+- React Icon.
+- Short explanation.
+- Optional trend indicator only when supported by actual comparison data.
+- Optional navigation action.
+
+Use four cards.
+
+### Card 1: New enquiries
+
+Data:
+- Count of records whose status is `new`.
+
+Display:
+- Label: New enquiries.
+- Supporting text: Awaiting your response.
+- Inbox icon.
+- Coral highlight.
+
+Clicking opens `/enquiries?status=new`.
+
+### Card 2: Active projects
+
+Data:
+- Projects whose statuses are explicitly defined as active, such as `in_progress` and `review`.
+
+Display:
+- Label: Active projects.
+- Supporting text: Currently underway.
+
+Clicking opens `/projects?status=in_progress`.
+
+### Card 3: Pipeline value
+
+Data:
+- Sum of budgets for eligible open opportunities.
+
+Exclude:
+- Converted enquiries.
+- Lost enquiries.
+- Archived enquiries.
+- Opportunities already represented by a converted project.
+
+Display:
+- Label: Pipeline value.
+- Supporting text: Estimated value of open opportunities.
+
+Use a currency formatter configured for NGN by default. Use `Intl.NumberFormat` where appropriate.
+
+### Card 4: Conversion rate
+
+Calculate:
+
+`converted eligible enquiries / total eligible enquiries × 100`
+
+Define the eligible statuses and reporting period explicitly.
+
+If the denominator is zero, display `—` instead of `NaN` or `Infinity`.
+
+Display:
+- Label: Conversion rate.
+- Percentage.
+- Reporting period.
+- Trend only if supported by real comparison data.
+
+All KPI values must come from shared data selectors. Do not hardcode the displayed values.
+
+## 9. PERFORMANCE CHART
+
+Create a `PerformanceChart` component.
+
+Purpose:
+Show how enquiry activity and collected revenue change over time.
+
+Provide a selector:
+- Last 7 days.
+- Last 30 days.
+- Last 90 days.
+
+Display:
+- Date labels.
+- Clearly labeled values.
+- Legend if multiple series are present.
+- Tooltips or an accessible equivalent.
+- Responsive chart sizing.
+- A useful empty state.
+
+Use coral as the primary series color.
+
+Possible data format:
+
+`{ date, enquiriesReceived, revenueCollected }`
+
+The chart must derive values from the selected period. Do not generate random data during renders.
+
+Revenue collected must come from payment records marked as paid. Do not use estimated enquiry budgets as earned revenue.
+
+If a chart library is used, install it explicitly and verify that it works with Vite and React.
+
+## 10. ENQUIRY PIPELINE
+
+Create a `PipelineSummary` component.
+
+Stages:
+- New.
+- Contacted.
+- In progress.
+- Converted.
+- Lost or archived, if useful.
+
+Each stage displays:
+- Label.
+- Count.
+- Proportion, where meaningful.
+- Visual progress bar.
+- Consistent status color.
+
+All counts must derive from the shared enquiries dataset.
+
+Define the denominator used for percentages. Make the rule consistent across all stages.
+
+Clicking a stage opens the enquiries page filtered to that status.
+
+Do not invent pipeline totals independently of the underlying records.
+
+## 11. UPCOMING TASKS
+
+Create an `UpcomingTasks` component.
+
+Show:
+- Follow-up reminders.
+- Client response tasks.
+- Project deadlines.
+- Proposal tasks.
+- Milestone reviews.
+
+Each task includes:
+- Title.
+- Related client or project.
+- Due date.
+- Priority.
+- Completion state.
+- Link to its related record.
+
+Example model:
+
+`{ id, title, relatedType, relatedId, dueDate, priority, completed }`
+
+Interactions:
+- Mark task complete.
+- Open related enquiry or project.
+- Persist completion state.
+- Show an empty state when all tasks are complete.
+
+Use clear priority indicators without overwhelming the interface.
+
+Do not render nonfunctional checkboxes.
+
+## 12. RECENT ENQUIRIES
+
+Create a `RecentEnquiries` component.
+
+Display the five most recent enquiries by default.
+
+Fields:
+- Client.
+- Project title.
+- Service.
+- Budget.
+- Date received.
+- Status.
+- Actions.
+
+Desktop:
+- Clean table.
+- Subtle dividers.
+- Compact rows.
+- Clear column headings.
+
+Mobile:
+- Use stacked cards or another readable responsive layout.
+- Do not force a wide table offscreen.
+
+Each record may display an avatar or initials.
+
+Status badges:
+- New: pale coral.
+- Contacted: blue.
+- In progress: amber or violet.
+- Converted: green.
+- Lost or archived: gray.
+
+Always show the status label; do not rely on color alone.
+
+Interactions:
+- Open enquiry details.
+- Update status.
+- Navigate to all enquiries.
+- Edit or archive when implemented.
+- Confirm destructive actions.
+
+All actions must update the shared data source.
+
+## 13. RECENT ACTIVITY
+
+Create an `ActivityFeed` component.
+
+Show events such as:
+- New enquiry received.
+- Enquiry status changed.
+- Project updated.
+- Task completed.
+- Portfolio item added.
+
+Each activity record includes:
+- ID.
+- Type.
+- Title.
+- Description.
+- Related entity type and ID.
+- Timestamp.
+
+Appearance:
+- Small icon.
+- Subtle circular icon background.
+- Short title.
+- Supporting description.
+- Relative timestamp.
+
+Interactions:
+- Open the related record.
+- Show an empty state when no activity exists.
+
+Create activity records when meaningful actions occur. Do not invent new activity on every render.
+
+## 14. ENQUIRY MANAGEMENT PAGE
+
+Route: `/enquiries`
+
+Build a complete, functional enquiries page.
+
+Include:
+- Page heading.
+- Add enquiry action.
+- Search field.
+- Status filter.
+- Service filter.
+- Sorting controls.
+- Enquiry table or responsive cards.
+- Enquiry detail panel or modal.
+- Status update control.
+- Notes.
+- Archive action.
+- Confirmation dialog for deletion if deletion is supported.
+
+Search by:
+- Client name.
+- Email.
+- Project title.
+
+Sort by:
+- Newest.
+- Oldest.
+- Budget ascending.
+- Budget descending.
+
+Use URL query parameters to preserve filters when practical.
+
+When the user changes an enquiry status, update:
+- The enquiry list.
+- Dashboard KPI cards.
+- Pipeline summary.
+- Notification state when relevant.
+- Activity feed.
+- localStorage.
+
+Do not maintain separate hardcoded copies of the same enquiry.
+
+## 15. PROJECTS PAGE
+
+Route: `/projects`
+
+Create:
+- Project overview.
+- Project list or card grid.
+- Search and filters.
+- Status badges.
+- Progress indicators.
+- Project details.
+- Due dates.
+- Client names.
+- Budgets.
+- Add/edit project actions.
+
+Project statuses:
+- Planned.
+- In progress.
+- Review.
+- Completed.
+- On hold.
+- Cancelled.
+
+Example model:
+
+`{ id, title, clientName, enquiryId, status, budget, currency, startDate, dueDate, progress, createdAt, updatedAt }`
+
+Progress must remain between 0 and 100.
+
+Active project metrics must use the same status rules as the Projects page.
+
+## 16. PORTFOLIO PAGE
+
+Route: `/portfolio`
+
+Create a professional portfolio management interface.
+
+Features:
+- Portfolio grid.
+- Add project.
+- Edit project.
+- Delete with confirmation.
+- Category selection.
+- Project title and description.
+- Local image upload.
+- Image preview.
+- Image validation.
+- Responsive image cards.
+- Empty state.
+
+Categories:
+- Branding.
+- Packaging.
+- UI Design.
+- Illustration.
+- Motion.
+
+Use existing uploaded image and SVG assets where appropriate.
+
+Inspect the actual files before referencing them. Never invent filenames or assume that an uploaded chat attachment automatically exists inside the project directory.
+
+For images in `public/images/`, use paths such as `/images/creative-designer.jpg`.
+
+For assets in `src/assets/`, import the files into the relevant React component.
+
+Validate image type and file size.
+
+Explain the limitations of storing image data in browser storage. Do not claim that files have been uploaded to a server.
+
+Do not present stock photographs as completed design projects.
+
+## 17. PUBLIC DESIGNER PROFILE
+
+Route: `/profile`
+
+Create a public-facing designer profile containing:
+- Profile photo or initials.
+- Designer name.
+- Professional title.
+- Biography.
+- Services.
+- Portfolio gallery.
+- Budget range.
+- Contact/enquiry form.
+- Social or portfolio links.
+
+Use configurable demo data.
+
+The profile should resemble a professional designer's landing page and be responsive on mobile.
+
+The contact form should create a demo enquiry through the shared data layer.
+
+Clearly distinguish between a working frontend prototype and a real published profile accessible to external visitors.
+
+## 18. ANALYTICS PAGE
+
+Route: `/analytics`
+
+Include:
+- Enquiry trends.
+- Conversion rate.
+- Pipeline value.
+- Revenue collected.
+- Project completion statistics.
+- Service category breakdown.
+- Time-range filters.
+
+Use a consistent reporting period and document the calculations.
+
+Never present estimates as collected revenue.
+
+If there is insufficient data, show an informative empty state rather than fabricated business insights.
+
+## 19. SETTINGS PAGE
+
+Route: `/settings`
+
+Include working prototype settings for:
+- Designer display name.
+- Professional title.
+- Currency.
+- Timezone.
+- Notification preferences.
+- Theme preference only if implemented.
+
+Persist appropriate settings locally.
+
+Do not create fake password changes, email verification, billing controls, or authentication functionality.
+
+Clearly mark any feature that requires backend integration.
+
+## 20. SHARED DATA MODEL
+
+Create a centralized data layer.
+
+Suggested files:
+- `src/data/demoData.js`
+- `src/context/WorkspaceContext.jsx`
+- `src/hooks/useWorkspaceData.js`
+- `src/utils/metrics.js`
+- `src/utils/formatters.js`
+
+Adapt filenames to the existing project where sensible.
+
+### Enquiry model
+
+Use canonical status values:
+
+`new`, `contacted`, `in_progress`, `converted`, `lost`, `archived`.
+
+Example:
+
+`{ id, clientName, email, projectTitle, service, message, budget, currency, status, createdAt, lastUpdatedAt, followUpDate, source, notes }`
+
+Use fictional demo clients and reserved example email addresses.
+
+### Project model
+
+`{ id, title, clientName, enquiryId, status, budget, currency, startDate, dueDate, progress, createdAt, updatedAt }`
+
+### Revenue model
+
+`{ id, projectId, amount, currency, status, paidAt }`
+
+Only paid records contribute to revenue collected.
+
+### Task model
+
+`{ id, title, relatedType, relatedId, dueDate, priority, completed }`
+
+### Activity model
+
+`{ id, type, title, description, entityType, entityId, createdAt }`
+
+### Notification model
+
+`{ id, title, description, entityType, entityId, createdAt, readAt }`
+
+### Demo profile
+
+`{ id, name, title, currency, timezone }`
+
+All example data must be clearly identified as fictional.
+
+## 21. CENTRALIZED METRICS
+
+Create reusable functions for:
+- New enquiry count.
+- Active project count.
+- Open pipeline value.
+- Conversion rate.
+- Enquiries by status.
+- Revenue collected.
+- Upcoming tasks.
+- Recent enquiries.
+- Unread notification count.
+- Project completion statistics.
+
+Define all business rules in one place.
+
+Requirements:
+- Avoid division by zero.
+- Exclude lost and archived opportunities from the open pipeline.
+- Do not count converted opportunities as open.
+- Do not double-count enquiry budgets and project budgets.
+- Do not count unpaid amounts as collected revenue.
+- Use a consistent currency formatter.
+- Handle missing data safely.
+- Handle empty arrays.
+- Avoid `NaN`, `Infinity`, and `undefined` in the UI.
+
+## 22. STATE MANAGEMENT AND PERSISTENCE
+
+Use shared React state for the workspace.
+
+For a prototype, Context plus a reducer or another simple, maintainable solution is acceptable.
+
+Persist relevant data in localStorage:
+- Enquiries.
+- Projects.
+- Tasks.
+- Activity.
+- Notifications.
+- Portfolio items.
+- Settings.
+
+Requirements:
+- Initialize demo data only when appropriate.
+- Do not overwrite user changes on every render.
+- Generate stable IDs.
+- Update React state and persistence consistently.
+- Validate stored JSON.
+- Handle invalid or unavailable storage gracefully.
+- Avoid storing secrets and passwords.
+
+After refreshing the browser, saved prototype changes should remain available.
+
+Explain that localStorage is browser-specific and is not a secure production database.
+
+## 23. ADD ENQUIRY MODAL
+
+Create a reusable accessible modal.
+
+Fields:
+- Client name.
+- Email.
+- Project title.
+- Service.
+- Budget.
+- Message.
+- Optional follow-up date.
+
+Requirements:
+- Visible field labels.
+- Required-field validation.
+- Email-format validation.
+- Nonnegative budget validation.
+- Cancel button.
+- Submit button.
+- Close button.
+- Escape-key support.
+- Appropriate keyboard focus behavior.
+- Clear error messages.
+- Success feedback.
+
+On submission:
+1. Validate input.
+2. Create a stable ID.
+3. Set status to `new`.
+4. Set timestamps.
+5. Add the enquiry to shared state.
+6. Persist it.
+7. Add an activity event.
+8. Update dashboard calculations.
+9. Close the modal after success.
+
+Do not reload the entire page.
+
+## 24. NOTIFICATIONS
+
+Build a functional notification panel.
+
+Show relevant events:
+- New enquiries.
+- Upcoming follow-ups.
+- Approaching project deadlines.
+
+Each notification should have:
+- Title.
+- Description.
+- Timestamp.
+- Read/unread state.
+- Link to a related record where applicable.
+
+The notification badge must derive from unread records.
+
+Persist read state when feasible.
+
+Do not claim email, push notifications, or external messaging are implemented unless they actually are.
+
+## 25. REACT ICONS
+
+Use `react-icons` consistently, preferably `react-icons/lu`.
+
+Possible icons:
+- `LuLayoutDashboard`
+- `LuInbox`
+- `LuFolderKanban`
+- `LuImages`
+- `LuUserRound`
+- `LuChartNoAxesCombined`
+- `LuSettings`
+- `LuSearch`
+- `LuPlus`
+- `LuBell`
+- `LuCalendarDays`
+- `LuCircleCheck`
+- `LuClock3`
+- `LuArrowUpRight`
+- `LuMoreHorizontal`
+- `LuMenu`
+- `LuX`
+- `LuWallet`
+- `LuUsers`
+
+Verify that each imported icon exists in the installed package version.
+
+Use consistent sizes and alignments. Icon-only buttons must have accessible names.
+
+## 26. REUSABLE COMPONENT ARCHITECTURE
+
+Use appropriate reusable components, including:
+- DashboardLayout.
+- DashboardSidebar.
+- MobileNavigation.
+- DashboardHeader.
+- MetricCard.
+- PerformanceChart.
+- PipelineSummary.
+- UpcomingTasks.
+- RecentEnquiries.
+- ActivityFeed.
+- NotificationPanel.
+- AddEnquiryModal.
+- EnquiryTable.
+- EnquiryDetails.
+- ProjectCard.
+- PortfolioCard.
+- StatusBadge.
+- EmptyState.
+- ConfirmDialog.
+- Toast.
+- Button.
+- Input.
+- Select.
+- Card.
+- Avatar.
+
+Keep each component focused on a clear responsibility.
+
+Avoid putting the entire application inside one component.
+
+Avoid duplicated business logic and hardcoded metric values.
+
+## 27. ACCESSIBILITY
+
+Implement:
+- Semantic HTML.
+- Correct heading hierarchy.
+- Visible keyboard focus.
+- Accessible labels.
+- Keyboard-operable menus and dialogs.
+- Appropriate ARIA attributes.
+- Proper button types.
+- Accessible names for icon-only controls.
+- Status text in addition to color.
+- Readable contrast.
+- Reduced-motion support.
+
+## 28. RESPONSIVE DESIGN
+
+Test these widths:
+- 375px mobile.
+- 430px mobile.
+- 768px tablet.
+- 1024px desktop.
+- 1440px large desktop.
+
+Verify:
+- No unwanted horizontal scrolling.
+- Mobile navigation works.
+- KPI cards wrap properly.
+- Charts resize.
+- Tables remain usable.
+- Modals fit the viewport.
+- Long text wraps correctly.
+- Buttons are touch-friendly.
+- The sidebar and header remain usable.
+
+## 29. IMAGE ASSET REQUIREMENTS
+
+Inspect the real project asset directories before using images.
+
+Requirements:
+- Match exact filenames and extensions.
+- Use correct relative paths.
+- Verify that each referenced file exists.
+- Preserve useful SVG assets.
+- Do not silently substitute missing images.
+- Do not invent image filenames.
+- Provide meaningful alt text.
+- Use appropriate `object-cover` or `object-contain`.
+- Check the browser for failed image requests.
+
+If an image is missing, report the exact filename and expected location.
+
+## 30. ROUTING
+
+Implement:
+- `/dashboard`
+- `/enquiries`
+- `/projects`
+- `/portfolio`
+- `/profile`
+- `/analytics`
+- `/settings`
+
+Use React Router.
+
+All sidebar links must work.
+
+Dashboard cards, pipeline stages, and enquiry rows should navigate to the relevant views.
+
+Support relevant query parameters, such as `/enquiries?status=new`.
+
+Display a useful Not Found page for unknown routes.
+
+Do not leave nonfunctional links or buttons.
+
+## 31. ERROR AND EMPTY STATES
+
+Implement helpful empty states for:
+- No enquiries.
+- No projects.
+- No upcoming tasks.
+- No activity.
+- No notifications.
+- No revenue.
+- No portfolio items.
+- No search results.
+
+Provide relevant actions where useful.
+
+Handle:
+- Invalid localStorage data.
+- Missing optional fields.
+- Failed actions.
+- Empty datasets.
+- Invalid form values.
+
+Never display a broken image, `undefined`, `NaN`, or an uncaught exception as normal interface content.
+
+## 32. SECURITY AND PRODUCTION LIMITATIONS
+
+This is initially a frontend prototype.
+
+Do not claim:
+- Real authentication exists.
+- Data is securely isolated by user.
+- A production database is connected.
+- Emails are being sent.
+- Payments are being processed.
+- Data is synchronized between devices.
+- Uploaded images are stored on a server.
+
+Keep the data layer structured for later backend integration.
+
+Real authentication, secure per-user authorization, database persistence, file storage, email delivery, and payment processing must be implemented with appropriate backend services before production use.
+
+## 33. TESTING AND VERIFICATION
+
+Before declaring completion:
+
+1. Run the development server.
+2. Verify the dashboard route.
+3. Verify every implemented route.
+4. Test desktop and mobile navigation.
+5. Test the Add Enquiry modal.
+6. Add an enquiry and confirm the KPI updates.
+7. Change enquiry status and confirm the pipeline updates.
+8. Verify the pipeline counts against the dataset.
+9. Verify pipeline value excludes converted, lost, and archived records.
+10. Verify revenue collected comes from paid records.
+11. Test search, filters, and sorting.
+12. Test task completion.
+13. Test notification read/unread behavior.
+14. Refresh the browser and verify persistence.
+15. Check for missing images and SVG assets.
+16. Check browser console errors.
+17. Check responsive layouts.
+18. Run the production build.
+19. Fix errors found during testing.
+20. Preserve the original Git history and unrelated files.
+
+Do not claim that a feature has been tested if it has not actually been tested.
+
+## 34. IMPLEMENTATION STAGES
+
+Work in manageable stages.
+
+Stage 1: Inspect the existing project and safely prepare React, Vite, Tailwind CSS, and React Icons.
+
+Stage 2: Build the design system, routing, sidebar, header, and responsive layout.
+
+Stage 3: Create the shared data model, localStorage layer, and centralized metric calculations.
+
+Stage 4: Build the overview page, KPI cards, performance chart, and pipeline summary.
+
+Stage 5: Implement enquiries, projects, tasks, notifications, and activity.
+
+Stage 6: Build portfolio management, public profile, analytics, and settings.
+
+Stage 7: Connect and verify interactions, persistence, image assets, and responsive behavior.
+
+Stage 8: Run tests and the production build, fix errors, and document the result.
+
+Complete and verify each stage before proceeding. If a tool or model fails, preserve working files and continue from the last verified state.
+
+Do not stop at planning. Make actual code changes.
+
+## 35. FINAL REPORT
+
+At completion, provide:
+- Summary of what was implemented.
+- Files created and modified.
+- Dependencies installed.
+- Routes available.
+- Functional interactions tested.
+- Data calculations and status rules.
+- Image assets verified.
+- Production build result.
+- Known limitations.
+- Commands to run and build the application.
+
+Use honest results. If a feature remains incomplete, identify it clearly.
+
+BEGIN by inspecting the existing project, then proceed with implementation and verification.

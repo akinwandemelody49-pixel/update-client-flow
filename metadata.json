@@ -1,0 +1,6 @@
+{
+  "name": "ClientFlow - Graphic Designer SaaS Platform",
+  "description": "The all-in-one platform for independent graphic designers to showcase portfolios, attract clients, track enquiry pipelines, and manage design projects.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
